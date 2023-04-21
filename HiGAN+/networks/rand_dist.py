@@ -61,6 +61,18 @@ class Distribution(torch.Tensor):
         new_obj.data = super().to(*args, **kwargs)
         return new_obj
 
+    def new_empty(self, size, *, dtype=None, device=None, requires_grad=False, layout=torch.strided, pin_memory=False):
+
+        '''Create a new empty tensor of the same type as the current one.
+        
+            Overridding new_empty is a new requirement as of https://github.com/pytorch/pytorch/pull/73078,
+            in order for deepcopy to work.
+        '''
+        new_obj = Distribution(self)
+        new_obj.init_distribution(self.dist_type, **self.dist_kwargs)
+        new_obj.data = super().new_empty(size, dtype=dtype, device=device, requires_grad=requires_grad, layout=layout, pin_memory=pin_memory)
+        return new_obj
+
 # Convenience function to prepare a z vector
 def prepare_z_dist(G_batch_size, dim_z, device='cuda', seed=0):
     z_ = Distribution(torch.randn(G_batch_size, dim_z, requires_grad=False))

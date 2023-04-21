@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "justMyCode": true,
+            "justMyCode": false,
             "env": {"LD_LIBRARY_PATH": "/usr/lib64-nvidia"}
         }
     ]

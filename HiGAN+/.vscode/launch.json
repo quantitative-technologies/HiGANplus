@@ -5,13 +5,34 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "eval_demo",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "LD_LIBRARY_PATH": "/usr/lib64-nvidia"
+            },
+            "args": [
+                "--config",
+                "configs/gan_iam.yml",
+                "--ckpt", 
+                "pretrained/deploy_HiGAN+.pth", 
+                "--mode", 
+                "rand"
+            ]
+        },
+        {
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": false,
-            "env": {"LD_LIBRARY_PATH": "/usr/lib64-nvidia"}
+            "env": {
+                "LD_LIBRARY_PATH": "/usr/lib64-nvidia"
+            }
         }
     ]
 }
